@@ -30,7 +30,6 @@ app.set('view engine', 'ejs');
 const getArticle = async (req, res) => {
   try {
     const data = await dbQuery('SELECT * FROM articles');
-    console.log(data.length < 1);
 
     if (data.length < 1) {
       return res.render('blog', {
@@ -69,7 +68,6 @@ const postArticle = async (req, res) => {
   try {
     const id = uuid.v4();
     const image = `./img/${req.file.filename}`;
-    console.log(req.file);
     const insertArticle = await dbQuery(
       'INSERT INTO articles (id,title,contents, image) VALUES (?,?,?, ?)',
       [id, title, contents, image]
@@ -86,14 +84,29 @@ const postArticle = async (req, res) => {
     //   });
     // }
 
-    res.redirect('/blog');
-  } catch (error) {
+    // res.redirect('blog');
     res.json({
-      status: false,
-      message: 'Gagal menambah data',
-      error,
+      message: 'tambah data berhasil',
     });
+  } catch (err) {
+    res.render;
   }
+};
+
+const updateArticle = async (req, res) => {
+  const { id, title, contents } = req.body;
+  console.log(req.body);
+  console.log(id);
+  const image = `./img/${req.file.filename}`;
+  const data = await dbQuery(
+    'UPDATE articles SET title=?, contents=?, image=? WHERE id=? ',
+    [title, contents, image, id]
+  );
+
+  res.json({
+    message: 'success update article',
+    data: data,
+  });
 };
 
 const deleteArticle = async (req, res) => {
@@ -111,9 +124,16 @@ app.get('/article', (req, res) => {
   res.render('form_article');
 });
 
+app.get('/update-article', (req, res) => {
+  res.render('update_article', {
+    id: req.query.id,
+  });
+});
+
 app.get('/blog', getArticle);
 app.post('/submit-article', upload.single('image'), postArticle);
 app.get('/delete/:id', deleteArticle);
+app.post('/update-article', upload.single('image'), updateArticle);
 
 app.listen(3000, () => {
   console.log('Server is running....');
