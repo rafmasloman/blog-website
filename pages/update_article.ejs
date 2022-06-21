@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+
+    <link rel="stylesheet" href="/css/style.css" type="text/css" />
+  </head>
+  <body>
+    <div class="header container bg-stone-800 flex pt-4 pb-2 mx-auto">
+      <div class="brand w-56 text-white pl-32">
+        <span class="brand-name items-center flex">Blog.</span>
+      </div>
+
+      <nav class="navbar text-white flex flex-1">
+        <ul class="nav-list flex flex-1 justify-center">
+          <li class="home"><a href="/" class="mr-20">Home</a></li>
+          <li class="blog"><a href="/blog" class="mr-20">Blog</a></li>
+          <li class="products"><a href="/product">Product</a></li>
+        </ul>
+        <div class="login-btn pr-32">
+          <button
+            class="px-6 py-2 flex text-white bg-blue-600 rounded-lg hover:bg-blue-900 al"
+          >
+            Login
+          </button>
+        </div>
+      </nav>
+    </div>
+
+    <h1>Update Article</h1>
+    <section id="hero" class="py-20 flex justify-center">
+      <form
+        class="w-6/12"
+        method="post"
+        action="update-article"
+        enctype="multipart/form-data"
+      >
+        <div class="mb-6">
+          <label
+            for="title"
+            class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+            >Title</label
+          >
+          <input
+            type="text"
+            id="title"
+            name="title"
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            placeholder="title"
+          />
+        </div>
+
+        <div class="text-content mb-6">
+          <label
+            for="content"
+            class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+            >Content</label
+          >
+          <textarea
+            id="contents"
+            name="contents"
+            rows="4"
+            class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            placeholder="Write your content"
+          ></textarea>
+        </div>
+
+        <div class="mb-6">
+          <input type="file" id="image" name="image" accept="image/*" />
+          <input type="submit" value="Upload" />
+        </div>
+
+        <input type="hidden" name="id" class="product_id" value="<%= id %>" />
+
+        <button
+          type="submit"
+          class="text-white bg-red-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+        >
+          Update
+        </button>
+      </form>
+    </section>
+  </body>
+</html>
